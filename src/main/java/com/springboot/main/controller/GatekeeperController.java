@@ -6,26 +6,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.main.model.Resident;
+import com.springboot.main.model.Gatekeeper;
 import com.springboot.main.model.User;
-import com.springboot.main.service.ResidentService;
+import com.springboot.main.service.GatekeeperService;
 import com.springboot.main.service.UserService;
 
 @RestController
-@RequestMapping("/resident")
-public class ResidentController {
+@RequestMapping("/gatekeeper")
+public class GatekeeperController {
+
 	@Autowired
-	private ResidentService residentService;
+	private GatekeeperService gatekeeperService;
 	@Autowired
 	private UserService userService;
 
 	@PostMapping("/add")
-	public Resident insertResident(@RequestBody Resident resident) {
-		User user = resident.getUser();
-		user.setRole("RESIDENT");
-		user = userService.insert(user);
-		resident.setUser(user);
-		return residentService.insert(resident);
+	public Gatekeeper insertGateKeeper(@RequestBody Gatekeeper gatekeeper) {
+		User user = gatekeeper.getUser();
+		user.setRole("GATEKEEPER");
+		user= userService.insert(user);
+		gatekeeper.setUser(user);
+		return gatekeeperService.insert(gatekeeper);
 	}
 
 }

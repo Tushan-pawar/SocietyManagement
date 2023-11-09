@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Event {
@@ -19,8 +18,6 @@ public class Event {
 	private String location;
 	private String participantList;
 
-	@ManyToOne
-	private Notice notice;
 
 	public int getId() {
 		return id;
@@ -63,11 +60,4 @@ public class Event {
 		this.participantList = participantList;
 	}
 
-	public Notice getNotice() {
-		return notice;
-	}
-
-	public void setNotice(Notice notice) {
-		this.notice = notice;
-	}
 }

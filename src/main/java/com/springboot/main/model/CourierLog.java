@@ -17,7 +17,7 @@ public class CourierLog {
 	private LocalDate exitTime;
 
 	@ManyToOne
-	private GateKeeper gateKeeper;
+	private Gatekeeper gateKeeper;
 	@ManyToOne
 	private Resident resident;
 
@@ -53,11 +53,11 @@ public class CourierLog {
 		this.exitTime = exitTime;
 	}
 
-	public GateKeeper getGateKeeper() {
+	public Gatekeeper getGateKeeper() {
 		return gateKeeper;
 	}
 
-	public void setGateKeeper(GateKeeper gateKeeper) {
+	public void setGateKeeper(Gatekeeper gateKeeper) {
 		this.gateKeeper = gateKeeper;
 	}
 
