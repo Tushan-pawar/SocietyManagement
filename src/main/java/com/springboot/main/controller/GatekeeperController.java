@@ -21,11 +21,14 @@ public class GatekeeperController {
 	private UserService userService;
 
 	@PostMapping("/add")
-	public Gatekeeper insertGateKeeper(@RequestBody Gatekeeper gatekeeper) {
+	public Gatekeeper insert(@RequestBody Gatekeeper gatekeeper) {
+		/* save user with id */
 		User user = gatekeeper.getUser();
+		/*set role as gatekeeper*/
 		user.setRole("GATEKEEPER");
-		user= userService.insert(user);
 		gatekeeper.setUser(user);
+		/* save gatekeeper as user in table */
+		user = userService.insert(user);
 		return gatekeeperService.insert(gatekeeper);
 	}
 

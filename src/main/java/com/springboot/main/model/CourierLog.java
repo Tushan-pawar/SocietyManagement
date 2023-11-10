@@ -1,6 +1,7 @@
 package com.springboot.main.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +14,8 @@ public class CourierLog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String courierName;
-	private LocalDate entryTime;
-	private LocalDate exitTime;
+	private LocalDateTime entryTime;
+	private LocalDateTime exitTime;
 
 	@ManyToOne
 	private Gatekeeper gateKeeper;
@@ -37,19 +38,20 @@ public class CourierLog {
 		this.courierName = courierName;
 	}
 
-	public LocalDate getEntryTime() {
+	
+	public LocalDateTime getEntryTime() {
 		return entryTime;
 	}
 
-	public void setEntryTime(LocalDate entryTime) {
+	public void setEntryTime(LocalDateTime entryTime) {
 		this.entryTime = entryTime;
 	}
 
-	public LocalDate getExitTime() {
+	public LocalDateTime getExitTime() {
 		return exitTime;
 	}
 
-	public void setExitTime(LocalDate exitTime) {
+	public void setExitTime(LocalDateTime exitTime) {
 		this.exitTime = exitTime;
 	}
 

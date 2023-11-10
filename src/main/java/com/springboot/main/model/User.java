@@ -1,26 +1,23 @@
 package com.springboot.main.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="user_details")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(nullable = false)
+    private String name;
     private String username;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
     private String contact;
     private String flatNo; 
-    @Column(nullable = false)
     private String role;
    
     
@@ -41,7 +38,15 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
         return email;
     }
 

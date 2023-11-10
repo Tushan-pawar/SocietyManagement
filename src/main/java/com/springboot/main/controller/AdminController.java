@@ -20,13 +20,16 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 
-	/* add the admin */
 	@PostMapping("/add")
-	public Admin insertAdmin(@RequestBody Admin admin) {
+	public Admin insert(@RequestBody Admin admin) {
+		/* save user with id */
 		User user = admin.getUser();
+		/*set role as admin*/
 		user.setRole("ADMIN");
-		user = userService.insert(user);
 		admin.setUser(user);
+		/* save admin as user in table */
+		user = userService.insert(user);
 		return adminService.insert(admin);
 	}
+
 }

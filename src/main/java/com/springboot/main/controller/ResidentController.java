@@ -14,13 +14,14 @@ import com.springboot.main.service.UserService;
 @RestController
 @RequestMapping("/resident")
 public class ResidentController {
+
 	@Autowired
 	private ResidentService residentService;
 	@Autowired
 	private UserService userService;
 
 	@PostMapping("/add")
-	public Resident insertResident(@RequestBody Resident resident) {
+	public Resident insert(@RequestBody Resident resident) {
 		User user = resident.getUser();
 		user.setRole("RESIDENT");
 		user = userService.insert(user);

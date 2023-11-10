@@ -42,6 +42,7 @@ public class Admin {
 		this.user = user;
 	}
 
+
 	public String getRole() {
 		return role;
 	}
