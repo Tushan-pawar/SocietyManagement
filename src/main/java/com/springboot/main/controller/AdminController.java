@@ -26,9 +26,11 @@ public class AdminController {
 		User user = admin.getUser();
 		/*set role as admin*/
 		user.setRole("ADMIN");
+		/*Update the Admin object with the modified User object*/
 		admin.setUser(user);
-		/* save admin as user in table */
+		/* save user object */
 		user = userService.insert(user);
+		/*save modified admin object to database*/
 		return adminService.insert(admin);
 	}
 

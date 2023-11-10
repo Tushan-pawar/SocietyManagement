@@ -23,9 +23,13 @@ public class ResidentController {
 	@PostMapping("/add")
 	public Resident insert(@RequestBody Resident resident) {
 		User user = resident.getUser();
+		/* Set the role of the user to resident */
 		user.setRole("RESIDENT");
+		/* Save theUser to the database*/
 		user = userService.insert(user);
+		/* Update the Resident */
 		resident.setUser(user);
+		/* Save the modified Resident*/
 		return residentService.insert(resident);
 	}
 

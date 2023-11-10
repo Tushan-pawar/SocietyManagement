@@ -27,11 +27,12 @@ public class UserController {
 		User newUser = userService.insert(user);
 		/*set role as user*/
 		user.setRole("USER");
+		/*create a new Resident object */
 		Resident newResident = new Resident();
 		newResident.setName(newUser.getName());
 		/*set role as resident*/
 		newResident.setRole("RESIDENT");
-		/*enabled is false*/
+		/*role is not enabled*/
 		newResident.setEnabled(false);
 		newResident.setUser(newUser);
 		/* save user in table */
