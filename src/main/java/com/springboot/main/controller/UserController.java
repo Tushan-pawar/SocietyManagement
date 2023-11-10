@@ -12,7 +12,7 @@ import com.springboot.main.service.ResidentService;
 import com.springboot.main.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired
