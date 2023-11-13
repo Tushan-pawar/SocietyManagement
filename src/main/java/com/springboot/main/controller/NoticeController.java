@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
+=======
 >>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
 package com.springboot.main.controller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +28,11 @@ public Notice insertNotice(@RequestBody Notice notice) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
 }
 =======
 package com.springboot.main.controller;
@@ -54,4 +60,7 @@ public Notice insertNotice(@RequestBody Notice notice) {
 
 }
 >>>>>>> bc1f25922778682115cb590275a680864198a72b
+<<<<<<< HEAD
+>>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
+=======
 >>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
