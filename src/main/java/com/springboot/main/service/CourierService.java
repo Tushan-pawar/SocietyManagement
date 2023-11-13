@@ -5,12 +5,14 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.main.model.CourierLog;
 import com.springboot.main.repository.CourierRepository;
+
 @Service
-public class CourierService  {
-    @Autowired
-    private CourierRepository courierRepository;
+public class CourierService {
+	@Autowired
+	private CourierRepository courierRepository;
+
 	public CourierLog insert(CourierLog courierLog) {
-			return courierRepository.save(courierLog);
+		return courierRepository.save(courierLog);
 	}
 
 }

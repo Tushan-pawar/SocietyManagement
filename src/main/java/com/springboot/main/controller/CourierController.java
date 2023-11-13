@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.main.model.CourierLog;
 import com.springboot.main.service.CourierService;
-import com.springboot.main.service.GatekeeperService;
 
 @RestController
 @RequestMapping("/courier")
@@ -21,5 +20,5 @@ public class CourierController {
 	public CourierLog insert(@RequestBody CourierLog courierLog) {
 		return courierService.insert(courierLog);
 	}
-
+	
 }

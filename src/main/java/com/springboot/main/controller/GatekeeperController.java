@@ -24,13 +24,13 @@ public class GatekeeperController {
 	public Gatekeeper insert(@RequestBody Gatekeeper gatekeeper) {
 		/* save user with id */
 		User user = gatekeeper.getUser();
-		/*set role as gatekeeper*/
+		/* set role as gatekeeper */
 		user.setRole("GATEKEEPER");
-		/* Update the Gatekeeper object*/
+		/* Update the Gatekeeper object */
 		gatekeeper.setUser(user);
 		/* save gatekeeper as user in table */
 		user = userService.insert(user);
-		/*Save the modified Gatekeeper object to the database*/
+		/* Save the modified Gatekeeper object to the database */
 		return gatekeeperService.insert(gatekeeper);
 	}
 
