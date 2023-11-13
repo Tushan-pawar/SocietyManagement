@@ -17,7 +17,7 @@ public class VisitorLog {
     private LocalTime exitTime;
 
     @ManyToOne
-    private Gatekeeper gateKeeper;
+    private GateKeeper gateKeeper;
     @ManyToOne
     private Resident resident;
 
@@ -45,11 +45,11 @@ public class VisitorLog {
         this.exitTime = exitTime;
     }
 
-    public Gatekeeper getGateKeeper() {
+    public GateKeeper getGateKeeper() {
         return gateKeeper;
     }
 
-    public void setGateKeeper(Gatekeeper gateKeeper) {
+    public void setGateKeeper(GateKeeper gateKeeper) {
         this.gateKeeper = gateKeeper;
     }
 
