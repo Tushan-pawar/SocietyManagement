@@ -1,8 +1,6 @@
 package com.springboot.main.model;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,8 +34,6 @@ public class Resident {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public String getRole() {
 		return role;

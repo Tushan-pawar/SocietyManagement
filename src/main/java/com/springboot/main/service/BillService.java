@@ -8,10 +8,11 @@ import com.springboot.main.repository.BillRepository;
 
 @Service
 public class BillService {
-	@Autowired
-	private BillRepository billReposirory;
+@Autowired
+private BillRepository billRepository;
 
-	public Bill insert(Bill bill) {
-		return billReposirory.save(bill);
-	}
+public Bill insert(Bill bill) {
+	// TODO Auto-generated method stub
+	return billRepository.save(bill);
+}
 }
