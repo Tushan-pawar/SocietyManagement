@@ -6,5 +6,4 @@ import com.springboot.main.model.Bill;
 
 public interface BillRepository extends JpaRepository<Bill, Integer>{
 
-
 }

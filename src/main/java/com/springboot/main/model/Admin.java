@@ -14,10 +14,10 @@ public class Admin {
     private String name;
 	private String role;
 	private Boolean enabled;
-	
+
 	@OneToOne
 	private User user;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -41,7 +41,6 @@ public class Admin {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 	public String getRole() {
 		return role;

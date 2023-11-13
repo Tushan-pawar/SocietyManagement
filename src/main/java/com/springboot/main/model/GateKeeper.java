@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Gatekeeper {
+public class GateKeeper {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

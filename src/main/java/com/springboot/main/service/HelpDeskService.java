@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
 package com.springboot.main.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +18,28 @@ public  HelpDesk insert(HelpDesk helpDesk) {
 	// TODO Auto-generated method stub
 	return helpDeskRepository.save(helpDesk);
 }
+<<<<<<< HEAD
 }
+=======
+}
+=======
+package com.springboot.main.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springboot.main.model.HelpDesk;
+import com.springboot.main.repository.HelpDeskReposiroty;
+
+@Service
+public class HelpDeskService {
+@Autowired
+private  HelpDeskReposiroty helpDeskRepository;
+
+public  HelpDesk insert(HelpDesk helpDesk) {
+	// TODO Auto-generated method stub
+	return helpDeskRepository.save(helpDesk);
+}
+}
+>>>>>>> bc1f25922778682115cb590275a680864198a72b
+>>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
