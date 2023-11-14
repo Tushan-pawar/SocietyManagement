@@ -11,7 +11,12 @@ public class BillService {
 	@Autowired
 	private BillRepository billReposirory;
 
-	public Bill insert(Bill bill) {
+	/*//public Bill insert(Bill bill) {
+		//return billReposirory.save(bill);
+	}*/
+
+	public Bill postBill(Bill bill) {
+		// TODO Auto-generated method stub
 		return billReposirory.save(bill);
 	}
 }
