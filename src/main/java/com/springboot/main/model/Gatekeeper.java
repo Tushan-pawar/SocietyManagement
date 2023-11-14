@@ -7,17 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String name;
+public class Gatekeeper {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String name;
 	private String role;
 	private Boolean enabled;
-
+	
 	@OneToOne
 	private User user;
-
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -32,14 +33,6 @@ public class Admin {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getRole() {
@@ -57,4 +50,14 @@ public class Admin {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public User getUser() {
+		return user;
 	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+}

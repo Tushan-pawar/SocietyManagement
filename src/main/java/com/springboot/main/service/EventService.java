@@ -1,45 +1,4 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
-=======
->>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
->>>>>>> 1d7f627400cf2ed935338c192d15398243bbc147
-package com.springboot.main.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.springboot.main.model.Event;
-import com.springboot.main.repository.EventRepository;
-
-
-@Service
-public class EventService {
-
-    @Autowired
-    private EventRepository eventRepository;
-
-    public Event insertEvent(Event event) {
-        return eventRepository.save(event);
-    }
-
-    // You can add other service methods as needed
-
-<<<<<<< HEAD
-}
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-=======
-=======
->>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
-}
-=======
 package com.springboot.main.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,19 +10,13 @@ import com.springboot.main.repository.EventRepository;
 @Service
 public class EventService {
 
-    @Autowired
-    private EventRepository eventRepository;
+	@Autowired
+	private EventRepository eventRepository;
 
-    public Event insertEvent(Event event) {
-        return eventRepository.save(event);
-    }
+	public Event insertEvent(Event event) {
+		return eventRepository.save(event);
+	}
 
-    // You can add other service methods as needed
+	// You can add other service methods as needed
 
 }
->>>>>>> bc1f25922778682115cb590275a680864198a72b
-<<<<<<< HEAD
->>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
-=======
->>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
->>>>>>> 1d7f627400cf2ed935338c192d15398243bbc147

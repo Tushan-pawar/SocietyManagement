@@ -1,18 +1,28 @@
-package com.springboot.main.service;
+package com.springboot.main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springboot.main.model.VisitorLog;
-import com.springboot.main.repository.VisitorLogRepository;
+import com.springboot.main.service.GatekeeperService;
+import com.springboot.main.service.ResidentService;
+import com.springboot.main.service.VisitorLogService;
 
-@Service
-public class VisitorLogService {
-@Autowired 
-private VisitorLogRepository visitorLogRepository;
-
-public VisitorLog insert(VisitorLog visitorLog) {
-	// TODO Auto-generated method stub
-	return visitorLogRepository.save(visitorLog);
-}
+@Controller
+@RequestMapping("/visitorlogs")
+public class VisitorLogController {
+	@Autowired
+	private VisitorLogService visitorLogService; 
+	@Autowired
+	private GatekeeperService gatekeeperService;
+	@Autowired
+	private ResidentService residentService;
+	@PostMapping("/add")
+	public VisitorLog insertVisitorLog(@RequestBody VisitorLog visitorLog) {
+		visitorLog= visitorLogService.insert(visitorLog);
+	    return visitorLog;
+	}
 }
