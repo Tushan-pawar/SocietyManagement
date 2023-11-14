@@ -1,6 +1,7 @@
+<<<<<<< HEAD
 package com.springboot.main.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,11 +15,11 @@ public class CourierLog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String courierName;
-	private LocalDateTime entryTime;
-	private LocalDateTime exitTime;
+	private LocalDate entryTime;
+	private LocalDate exitTime;
 
 	@ManyToOne
-	private Gatekeeper gateKeeper;
+	private GateKeeper gateKeeper;
 	@ManyToOne
 	private Resident resident;
 
@@ -38,28 +39,27 @@ public class CourierLog {
 		this.courierName = courierName;
 	}
 
-	
-	public LocalDateTime getEntryTime() {
+	public LocalDate getEntryTime() {
 		return entryTime;
 	}
 
-	public void setEntryTime(LocalDateTime entryTime) {
+	public void setEntryTime(LocalDate entryTime) {
 		this.entryTime = entryTime;
 	}
 
-	public LocalDateTime getExitTime() {
+	public LocalDate getExitTime() {
 		return exitTime;
 	}
 
-	public void setExitTime(LocalDateTime exitTime) {
+	public void setExitTime(LocalDate exitTime) {
 		this.exitTime = exitTime;
 	}
 
-	public Gatekeeper getGateKeeper() {
+	public GateKeeper getGateKeeper() {
 		return gateKeeper;
 	}
 
-	public void setGateKeeper(Gatekeeper gateKeeper) {
+	public void setGateKeeper(GateKeeper gateKeeper) {
 		this.gateKeeper = gateKeeper;
 	}
 
@@ -70,4 +70,77 @@ public class CourierLog {
 	public void setResident(Resident resident) {
 		this.resident = resident;
 	}
+=======
+package com.springboot.main.model;
+
+import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class CourierLog {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String courierName;
+	private LocalDate entryTime;
+	private LocalDate exitTime;
+
+	@ManyToOne
+	private GateKeeper gateKeeper;
+	@ManyToOne
+	private Resident resident;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCourierName() {
+		return courierName;
+	}
+
+	public void setCourierName(String courierName) {
+		this.courierName = courierName;
+	}
+
+	public LocalDate getEntryTime() {
+		return entryTime;
+	}
+
+	public void setEntryTime(LocalDate entryTime) {
+		this.entryTime = entryTime;
+	}
+
+	public LocalDate getExitTime() {
+		return exitTime;
+	}
+
+	public void setExitTime(LocalDate exitTime) {
+		this.exitTime = exitTime;
+	}
+
+	public GateKeeper getGateKeeper() {
+		return gateKeeper;
+	}
+
+	public void setGateKeeper(GateKeeper gateKeeper) {
+		this.gateKeeper = gateKeeper;
+	}
+
+	public Resident getResident() {
+		return resident;
+	}
+
+	public void setResident(Resident resident) {
+		this.resident = resident;
+	}
+>>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
 }
