@@ -78,4 +78,13 @@ public class HelpDesk {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+
+	public Resident getResident() {
+		return resident;
+	}
+
+	public void setResident(Resident resident) {
+		this.resident = resident;
+	}
+	
 }

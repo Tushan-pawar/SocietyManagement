@@ -16,4 +16,9 @@ public class HomeServiceService {
 		// TODO Auto-generated method stub
 		return homeServiceRepository.save(homeService);
 	}
+
+	public HomeService postHomeService(HomeService homeService) {
+		// TODO Auto-generated method stub
+		return homeServiceRepository.save(homeService);
+	}
 }
