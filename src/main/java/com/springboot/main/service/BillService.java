@@ -16,4 +16,9 @@ public class BillService {
 		// TODO Auto-generated method stub
 		return billRepository.save(bill);
 	}
+	public Bill postBill(Bill bill) {
+		// TODO Auto-generated method stub
+		return billRepository.save(bill);
+	}
+
 }
