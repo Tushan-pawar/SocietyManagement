@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.springboot.main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +57,5 @@ public CourierLog insertCourierLog(@RequestBody CourierLog courierLog) {
 	courierLog= courierLogService.insert(courierLog);
     return courierLog;
 }
->>>>>>> 5dc1a4fcc131349ec52e4e213d2b9f911445b8ce
+
 }
