@@ -14,17 +14,17 @@ import com.springboot.main.service.ResidentService;
 @Controller
 @RequestMapping("/courierlogs")
 public class CourierLogController {
-	
-@Autowired
-private CourierLogService courierLogService; 
-@Autowired
-private GatekeeperService gatekeeperService;
-@Autowired
-private ResidentService residentService;
-@PostMapping("/add")
-public CourierLog insertCourierLog(@RequestBody CourierLog courierLog) {
-	courierLog= courierLogService.insert(courierLog);
-    return courierLog;
-}
 
+	@Autowired
+	private CourierLogService courierLogService;
+	@Autowired
+	private GatekeeperService gatekeeperService;
+	@Autowired
+	private ResidentService residentService;
+
+	@PostMapping("/add")
+	public CourierLog insertCourierLog(@RequestBody CourierLog courierLog) {
+		courierLog = courierLogService.insert(courierLog);
+		return courierLog;
+	}
 }

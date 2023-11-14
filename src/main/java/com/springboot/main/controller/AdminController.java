@@ -1,6 +1,7 @@
 package com.springboot.main.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,26 +28,35 @@ public class AdminController {
 
 	@PostMapping("/add")
 	public Admin insert(@RequestBody Admin admin) {
-		/* save user with id */
-		User user = admin.getUser();
-		/*set role as admin*/
-		user.setRole("ADMIN");
-		/*Update the Admin object with the modified User object*/
-		admin.setUser(user);
-		/* save user object */
-		user = userService.insert(user);
-		/*save modified admin object to database*/
-		return adminService.insert(admin);
+	    try {
+	        if (admin.getUser() == null  /* add other conditions for mandatory fields */) {
+	            throw new IllegalArgumentException("Please fill in all required fields.");
+	        }
+
+	        // Save user with id
+	        User user = admin.getUser();
+	        // Set role as Administrator
+	        user.setRole("ADMIN");
+	        // Update the Administrator object with the modified User object
+	        admin.setUser(user);
+	        // Save user object
+	        user = userService.insert(user);
+	        // Save modified Administrator object to the database
+	        return adminService.insert(admin);
+	    } catch (Exception e) {
+	        // Handle the exception (e.g., log it, return an error response)
+	        throw new RuntimeException("ERROR" + e.getMessage());
+	    }
 	}
-	
-	/* SriKanya code*/
+	/* SriKanya code */
 	@GetMapping("/getall")
 
-	public List<Admin> getAllAdmins(){
-	List<Admin> admin = adminService.getAllAdmins();
-	return admin;
+	public List<Admin> getAllAdmins() {
+		List<Admin> admin = adminService.getAllAdmins();
+		return admin;
 
 	}
+
 	@GetMapping("/getone/{id}")
 	public ResponseEntity<?> getOne(@PathVariable("id") int id) {
 

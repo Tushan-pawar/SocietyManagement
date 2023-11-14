@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.main.model.HelpDesk;
 import com.springboot.main.repository.HelpDeskReposiroty;
-import com.springboot.main.repository.HelpDeskRepository;
 
 @Service
 public class HelpDeskService {
