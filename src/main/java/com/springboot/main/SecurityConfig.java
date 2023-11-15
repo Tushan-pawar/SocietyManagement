@@ -19,13 +19,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	}
 
-	@Override
-	 protected void configure(HttpSecurity http) throws Exception {
-		  http.authorizeRequests()
-		  .anyRequest().permitAll()
-              .and().httpBasic()
-              .and().cors().disable()
-              .csrf().disable();
-  }
+	 @Override
+	    protected void configure(HttpSecurity http) throws Exception {
+	        http.authorizeRequests().anyRequest().permitAll()
+	            .and().httpBasic().disable()  
+	            .cors().disable()
+	            .csrf().disable();
+	        }
 	
 }

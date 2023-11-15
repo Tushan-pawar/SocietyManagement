@@ -18,7 +18,7 @@ public class UserService {
 	public User insert(User user) {
 		return userRepository.save(user);
 	}
-
+	
 	public User getOne(int id) throws InvalidIdException {
 		Optional<User> optional = userRepository.findById(id);
 		if (!optional.isPresent()) {
@@ -30,6 +30,12 @@ public class UserService {
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
 		userRepository.delete(user);
+	}
+
+	public User loadUserByUsername(String username) {
+		System.out.println("Loading done");
+		User user = userRepository.findByUsername(username);
+		return user;
 	}
 
 }

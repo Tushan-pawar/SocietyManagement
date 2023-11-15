@@ -1,7 +1,5 @@
 package com.springboot.main.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,22 +24,13 @@ public class ResidentController {
 	@Autowired
 	private UserService userService;
 
-	//@PostMapping("/resident/add")
 	@PostMapping("/add")
-	public Resident insertResident(@RequestBody Resident resident) {
-		User user = resident.getUser();
-		user.setRole("RESIDENT");
-		user = userService.insert(user);
-		resident.setUser(user);
-		return residentService.insert(resident);
+	public Resident insert(@RequestBody Resident resident) {
+	User user = resident.getUser();
+	user= userService.insert(user);
+	resident.setUser(user);
+	return residentService.insert(resident);
 	}
-	@GetMapping("/getall")
-	
-		public List<Resident> getAllResidents(){
-		List<Resident> resident = residentService.getAllResidents();
-		return resident;
-			
-		}
 	
 	@GetMapping("/getone/{id}")
 	public ResponseEntity<?> getOne(@PathVariable("id") int id) {
@@ -52,19 +41,16 @@ public class ResidentController {
 		} catch (InvalidIdException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-
+		
+		
 	}
-	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteVendor(@PathVariable("id") int id) {
 
 		try {
-			//validate id
 			Resident resident = residentService.getOne(id);
-			//delete
 			residentService.deleteResident(resident);
 			return ResponseEntity.ok().body("resident deleted successfully");
-
 		} catch (InvalidIdException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}

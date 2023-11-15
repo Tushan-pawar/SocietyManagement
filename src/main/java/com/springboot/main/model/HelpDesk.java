@@ -14,11 +14,10 @@ public class HelpDesk {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private String contact;
-	private String description;
-	private String category;
-	private String status;
 	private LocalDate date;
+	private String description;
+	private String status;
+	
 
 	@ManyToOne
 	private Resident resident;
@@ -39,13 +38,6 @@ public class HelpDesk {
 		this.name = name;
 	}
 
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
 
 	public String getDescription() {
 		return description;
@@ -55,13 +47,6 @@ public class HelpDesk {
 		this.description = description;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
 
 	public String getStatus() {
 		return status;

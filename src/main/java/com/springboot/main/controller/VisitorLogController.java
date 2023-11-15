@@ -20,32 +20,26 @@ import com.springboot.main.service.VisitorLogService;
 @RequestMapping("/visitorlogs")
 public class VisitorLogController {
 	@Autowired
-	private VisitorLogService visitorLogService; 
+	private VisitorLogService visitorLogService;
 	@Autowired
 	private GatekeeperService gatekeeperService;
 	@Autowired
 	private ResidentService residentService;
-/*	@PostMapping("/add")
-	public VisitorLog insertVisitorLog(@RequestBody VisitorLog visitorLog) {
-		visitorLog= visitorLogService.insert(visitorLog);
-	    return visitorLog;
-	}*/
+
 	@PostMapping("/add/{gatekeeperId}/{residentId}")
 	public ResponseEntity<?> addVisitorLog(@RequestBody VisitorLog visitorLog,
-            @PathVariable("gatekeeperId") int gatekeeperId,
-            @PathVariable("residentId") int residentId)  {
-		try{
-			 // Fetch gatekeeper and resident objects from the database using IDs
-            Gatekeeper gatekeeper = gatekeeperService.getOne(gatekeeperId);
-            visitorLog.setGateKeeper(gatekeeper);
-            Resident resident = residentService.getOne(residentId);
-            visitorLog.setResident(resident);
-			visitorLog= visitorLogService.insert(visitorLog);
-	    return ResponseEntity.ok().body(visitorLog);
-	}catch(InvalidIdException e) {
-       
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-}
-}
+			@PathVariable("gatekeeperId") int gatekeeperId, @PathVariable("residentId") int residentId) {
+		try {
+			Gatekeeper gatekeeper = gatekeeperService.getOne(gatekeeperId);
+			visitorLog.setGateKeeper(gatekeeper);
+			Resident resident = residentService.getOne(residentId);
+			visitorLog.setResident(resident);
+			visitorLog = visitorLogService.insert(visitorLog);
+			return ResponseEntity.ok().body(visitorLog);
+		} catch (InvalidIdException e) {
 
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+
+	}
+}

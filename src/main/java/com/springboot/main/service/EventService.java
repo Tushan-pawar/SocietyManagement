@@ -1,6 +1,8 @@
 
 package com.springboot.main.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ public class EventService {
 	public Event insertEvent(Event event) {
 		return eventRepository.save(event);
 	}
-
-	// You can add other service methods as needed
-
+	 public List<Event> getAllEvents() {
+	        return eventRepository.findAll();
+	    }
 }

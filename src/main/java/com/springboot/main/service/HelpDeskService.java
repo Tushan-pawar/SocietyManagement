@@ -13,12 +13,11 @@ public class HelpDeskService {
 	private HelpDeskReposiroty helpDeskRepository;
 
 	public HelpDesk insert(HelpDesk helpDesk) {
-		// TODO Auto-generated method stub
 		return helpDeskRepository.save(helpDesk);
 	}
 
 	public HelpDesk postHelpDesk(HelpDesk helpDesk) {
-		// TODO Auto-generated method stub
 		return helpDeskRepository.save(helpDesk);
 	}
-}
+	}
+

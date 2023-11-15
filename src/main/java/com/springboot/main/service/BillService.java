@@ -1,6 +1,8 @@
 
 package com.springboot.main.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +14,14 @@ public class BillService {
 	@Autowired
 	private BillRepository billRepository;
 
-	public Bill insert(Bill bill) {
-		// TODO Auto-generated method stub
-		return billRepository.save(bill);
-	}
 	public Bill postBill(Bill bill) {
-		// TODO Auto-generated method stub
 		return billRepository.save(bill);
 	}
-
+	  public List<Bill> getAllBills() {
+	        return billRepository.findAll();
+	    
+}
+	public List<Bill> getBillByResident(int residentId) {
+		return billRepository.findByResidentId(residentId);
+	}
 }
