@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.main.exception.InvalidIdException;
 import com.springboot.main.model.Resident;
 import com.springboot.main.model.User;
+import com.springboot.main.service.GatekeeperService;
 import com.springboot.main.service.ResidentService;
 import com.springboot.main.service.UserService;
 
@@ -23,7 +24,9 @@ public class ResidentController {
 	private ResidentService residentService;
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private GatekeeperService gateKeeperService;
+	
 	@PostMapping("/add")
 	public Resident insert(@RequestBody Resident resident) {
 	User user = resident.getUser();
@@ -55,5 +58,8 @@ public class ResidentController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+	
+    
+	
 
 }

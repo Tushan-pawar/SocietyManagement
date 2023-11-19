@@ -19,7 +19,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
-	@PostMapping("/add")
+	@PostMapping("/addnotices")
 	public Notice insertNotice(@RequestBody Notice notice) {
 		return noticeService.insert(notice);
 	}

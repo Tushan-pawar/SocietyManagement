@@ -1,6 +1,8 @@
 
 package com.springboot.main.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class HelpDeskService {
 
 	public HelpDesk postHelpDesk(HelpDesk helpDesk) {
 		return helpDeskRepository.save(helpDesk);
+	}
+
+	public List<HelpDesk> getAllTickets() {
+		return helpDeskRepository.findAll();
 	}
 	}
 

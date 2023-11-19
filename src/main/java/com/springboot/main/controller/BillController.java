@@ -28,7 +28,7 @@ public class BillController {
 	
 	 
 	 
-	@PostMapping("/add/{residentId}")
+	@PostMapping("/addbills/{residentId}")
 	public ResponseEntity<?> postBill(@RequestBody Bill bill, @PathVariable("residentId") int residentId) {
 		/* Fetch Resident object from db using residentId */
 		try {
