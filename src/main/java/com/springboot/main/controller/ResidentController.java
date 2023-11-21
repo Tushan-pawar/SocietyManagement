@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,28 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.main.exception.InvalidIdException;
 import com.springboot.main.model.Resident;
 import com.springboot.main.model.User;
-import com.springboot.main.service.GatekeeperService;
 import com.springboot.main.service.ResidentService;
 import com.springboot.main.service.UserService;
 
 @RestController
 @RequestMapping("/resident")
 public class ResidentController {
-	@Autowired
-	private ResidentService residentService;
+
 	@Autowired
 	private UserService userService;
+
 	@Autowired
-	private GatekeeperService gateKeeperService;
-	
+	private ResidentService residentService;
+
+/* Add residents in signup screen*/
 	@PostMapping("/add")
 	public Resident insert(@RequestBody Resident resident) {
-	User user = resident.getUser();
-	user= userService.insert(user);
-	resident.setUser(user);
-	return residentService.insert(resident);
+		User user = resident.getUser();
+		user = userService.insert(user);
+		resident.setUser(user);
+		return residentService.insert(resident);
 	}
-	
+/* get one resident by id*/
 	@GetMapping("/getone/{id}")
 	public ResponseEntity<?> getOne(@PathVariable("id") int id) {
 
@@ -44,9 +45,11 @@ public class ResidentController {
 		} catch (InvalidIdException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
-		
 	}
+	
+	
+	
+/* delete resident by id*/
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteVendor(@PathVariable("id") int id) {
 
@@ -59,7 +62,15 @@ public class ResidentController {
 		}
 	}
 	
-    
-	
-
+	/* update profile of resident*/
+	@PutMapping("/update/{id}")
+	public ResponseEntity<?> updateResident(@PathVariable("id") int id, @RequestBody Resident resident) {
+	    try {
+	        resident.setId(id); // Set the ID from the path variable to the resident object
+	        Resident updatedResident = residentService.updateResident(id, resident); // Pass the ID to the service method
+	        return ResponseEntity.ok().body(updatedResident);
+	    } catch (InvalidIdException e) {
+	        return ResponseEntity.badRequest().body(e.getMessage());
+	    }
+	}
 }

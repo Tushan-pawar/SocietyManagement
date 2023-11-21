@@ -1,6 +1,8 @@
 
 package com.springboot.main.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,10 @@ public class VisitorLogService {
 		// TODO Auto-generated method stub
 		return visitorLogRepository.save(visitorLog);
 	}
+
+	public List<VisitorLog> getVisitorLogsByResidentId(int residentId) {
+		  return visitorLogRepository.findByResidentId(residentId);
+	}
+
+	
 }

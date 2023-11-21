@@ -1,15 +1,22 @@
 package com.springboot.main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.main.exception.InvalidIdException;
 import com.springboot.main.model.Gatekeeper;
+import com.springboot.main.model.Resident;
 import com.springboot.main.model.User;
+import com.springboot.main.model.VisitorLog;
 import com.springboot.main.service.GatekeeperService;
+import com.springboot.main.service.ResidentService;
 import com.springboot.main.service.UserService;
+import com.springboot.main.service.VisitorLogService;
 
 @RestController
 @RequestMapping("/gatekeeper")
@@ -19,8 +26,12 @@ public class GatekeeperController {
 	private GatekeeperService gatekeeperService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ResidentService residentService;
+	@Autowired
+	private VisitorLogService visitorLogService;
 
-	@PostMapping("/add")
+	@PostMapping("/addGatekeeper")
 	public Gatekeeper insert(@RequestBody Gatekeeper gatekeeper) {
 		/* save user with id */
 		User user = gatekeeper.getUser();
@@ -34,5 +45,18 @@ public class GatekeeperController {
 		return gatekeeperService.insert(gatekeeper);
 	}
 
-	
+	@PostMapping("/addVisitor/{gatekeeperId}/{residentId}")
+	public ResponseEntity<?> addVisitorLog(@RequestBody VisitorLog visitorLog,
+			@PathVariable("gatekeeperId") int gatekeeperId, @PathVariable("residentId") int residentId) {
+		try {
+			Gatekeeper gatekeeper = gatekeeperService.getOne(gatekeeperId);
+			visitorLog.setGateKeeper(gatekeeper);
+			Resident resident = residentService.getOne(residentId);
+			visitorLog.setResident(resident);
+			visitorLog = visitorLogService.insert(visitorLog);
+			return ResponseEntity.ok().body(visitorLog);
+		} catch (InvalidIdException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
+}

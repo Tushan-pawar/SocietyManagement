@@ -1,6 +1,7 @@
 package com.springboot.main.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ public class NoticeService {
 
 	public List<Notice> getAllNotices() {
 		return noticeRepository.findAll();
+	}
+
+	public Optional<Notice> findById(int id) {
+		// TODO Auto-generated method stub
+		 return noticeRepository.findById(id);
 	}
 
 }

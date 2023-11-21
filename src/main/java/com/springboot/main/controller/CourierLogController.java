@@ -60,18 +60,11 @@ public class CourierLogController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+
 	@GetMapping("/getcourier/{residentId}")
-	public ResponseEntity<?> getCourierLogByResident(@PathVariable("residentId") int residentId) {
-		/* Fetch resident object using given residentId */
-		try {
-			Resident resident = residentService.getOne(residentId);
-			List<CourierLog> list= courierLogService.getCourierLogByResident(residentId);
-			return ResponseEntity.ok().body(list);
-		} catch (InvalidIdException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+	public ResponseEntity<?> getCourierLogByResident(@PathVariable("residentId") int residentId) throws Exception {
+	    List<CourierLog> list = courierLogService.getCourierLogByResident(residentId);
+	    return ResponseEntity.ok().body(list);
+	}
 
-		}
-
-}
-}
-
+	}

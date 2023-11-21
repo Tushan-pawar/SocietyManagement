@@ -19,7 +19,6 @@ public class ResidentService {
 		return residentRepository.save(resident);
 	}
 	public List<Resident> getAllResidents() {
-		// TODO Auto-generated method stub
 		return residentRepository.findAll();
 	}
 	public Resident getOne(int id) throws InvalidIdException {
@@ -30,8 +29,11 @@ public class ResidentService {
 		return optional.get();
 	}
 	public void deleteResident(Resident resident) {
-		// TODO Auto-generated method stub
 		 residentRepository.delete(resident);
 	}
-	
+	public Resident updateResident(int id, Resident resident) throws InvalidIdException {
+            resident.setId(id);
+            return residentRepository.save(resident);
+    
+    }
 }

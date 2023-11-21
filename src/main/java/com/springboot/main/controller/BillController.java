@@ -1,4 +1,3 @@
-
 package com.springboot.main.controller;
 
 import java.util.List;
@@ -17,6 +16,7 @@ import com.springboot.main.model.Bill;
 import com.springboot.main.model.Resident;
 import com.springboot.main.service.BillService;
 import com.springboot.main.service.ResidentService;
+
 @Controller
 @RequestMapping("/bills")
 public class BillController {
@@ -25,10 +25,9 @@ public class BillController {
 	private ResidentService residentService;
 	@Autowired
 	private BillService billService;
-	
-	 
-	 
-	@PostMapping("/addbills/{residentId}")
+
+	/* Post bill by resident id */
+	@PostMapping("/addBills/{residentId}")
 	public ResponseEntity<?> postBill(@RequestBody Bill bill, @PathVariable("residentId") int residentId) {
 		/* Fetch Resident object from db using residentId */
 		try {
@@ -44,24 +43,19 @@ public class BillController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 
 		}
-	}
+	} 
+
+	/* get all bills */
 	@GetMapping("/getall")
-    public ResponseEntity<List<Bill>> getAllBills() {
-        List<Bill> allBills = billService.getAllBills();
-        return ResponseEntity.ok().body(allBills);
-    }
+	public ResponseEntity<?> getAllBills() {
+		List<Bill> allBills = billService.getAllBills();
+		return ResponseEntity.ok().body(allBills);
+	}
 	
+	/* get all bill by resident id */
 	@GetMapping("/getall/{residentId}")
 	public ResponseEntity<?> getCourierLogByResident(@PathVariable("residentId") int residentId) {
-		/* Fetch resident object using given residentId */
-		try {
-			Resident resident = residentService.getOne(residentId);
-			List<Bill> list= billService.getBillByResident(residentId);
-			return ResponseEntity.ok().body(list);
-		} catch (InvalidIdException e) {	
-			return ResponseEntity.badRequest().body(e.getMessage());
-
-		}
+	    List<Bill> bills = billService.getBillByResident(residentId);
+	    return ResponseEntity.ok().body(bills);
 	}
 }
-
