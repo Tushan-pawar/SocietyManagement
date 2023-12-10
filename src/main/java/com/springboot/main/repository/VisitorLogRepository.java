@@ -10,4 +10,5 @@ import com.springboot.main.model.VisitorLog;
 public interface VisitorLogRepository extends JpaRepository<VisitorLog, Integer> {
 
 	List<VisitorLog> findByResidentId(int residentId);
+	
 }

@@ -23,5 +23,10 @@ public class VisitorLogService {
 		  return visitorLogRepository.findByResidentId(residentId);
 	}
 
+	 public List<VisitorLog> getAllVisitorLogs() {
+	        return visitorLogRepository.findAll();
+	    }
+	}
+
 	
-}
+

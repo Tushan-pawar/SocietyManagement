@@ -1,6 +1,6 @@
 package com.springboot.main.model;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +13,9 @@ public class VisitorLog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private LocalTime entryTime;
-    private LocalTime exitTime;
+	private String visitorName;
+    private LocalDate entryTime;
+    private LocalDate exitTime;
     private String visitorContact;
     
     @ManyToOne
@@ -30,23 +31,31 @@ public class VisitorLog {
         this.id = id;
     }
 
-    public LocalTime getEntryTime() {
-        return entryTime;
-    }
+	public LocalDate getEntryTime() {
+		return entryTime;
+	}
 
-    public void setEntryTime(LocalTime entryTime) {
-        this.entryTime = entryTime;
-    }
+	public void setEntryTime(LocalDate entryTime) {
+		this.entryTime = entryTime;
+	}
 
-    public LocalTime getExitTime() {
-        return exitTime;
-    }
+	public String getVisitorName() {
+		return visitorName;
+	}
 
-    public void setExitTime(LocalTime exitTime) {
-        this.exitTime = exitTime;
-    }
+	public void setVisitorName(String visitorName) {
+		this.visitorName = visitorName;
+	}
 
-    public String getVisitorContact() {
+	public LocalDate getExitTime() {
+		return exitTime;
+	}
+
+	public void setExitTime(LocalDate exitTime) {
+		this.exitTime = exitTime;
+	}
+
+	public String getVisitorContact() {
 		return visitorContact;
 	}
 

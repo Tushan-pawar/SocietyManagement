@@ -16,9 +16,6 @@ public class Event {
 	private String Content;
 	private LocalDate date;
 	private String location;
-	private String participantList;
-
-	
 
 	public int getId() {
 		return id;
@@ -51,14 +48,7 @@ public class Event {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}	
+
 	}
 
-	public String getParticipantList() {
-		return participantList;
-	}
-
-	public void setParticipantList(String participantList) {
-		this.participantList = participantList;
-	}
-
-}

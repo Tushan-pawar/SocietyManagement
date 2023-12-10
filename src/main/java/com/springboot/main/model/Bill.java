@@ -16,10 +16,14 @@ public class Bill {
 	private String particulars;
 	private Double amount;
 	private LocalDate lastDate;
-
+	private String paid;
+	
 	@ManyToOne
 	private Resident resident;
 
+	@ManyToOne 
+	private User user;
+	
 	public int getId() {
 		return id;
 	}
@@ -34,6 +38,16 @@ public class Bill {
 
 	public void setParticulars(String particulars) {
 		this.particulars = particulars;
+	}
+
+	
+
+	public String getPaid() {
+		return paid;
+	}
+
+	public void setPaid(String paid) {
+		this.paid = paid;
 	}
 
 	public Double getAmount() {
@@ -51,7 +65,6 @@ public class Bill {
 	public void setLastDate(LocalDate lastDate) {
 		this.lastDate = lastDate;
 	}
-
 
 	public Resident getResident() {
 		return resident;

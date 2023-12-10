@@ -1,7 +1,11 @@
 package com.springboot.main.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,58 +23,80 @@ import com.springboot.main.service.UserService;
 
 @RestController
 @RequestMapping("/resident")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class ResidentController {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private ResidentService residentService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-/* Add residents in signup screen*/
-	@PostMapping("/add")
-	public Resident insert(@RequestBody Resident resident) {
-		User user = resident.getUser();
-		user = userService.insert(user);
-		resident.setUser(user);
-		return residentService.insert(resident);
-	}
-/* get one resident by id*/
-	@GetMapping("/getone/{id}")
-	public ResponseEntity<?> getOne(@PathVariable("id") int id) {
+    @Autowired
+    private ResidentService residentService;
 
-		try {
-			Resident resident = residentService.getOne(id);
-			return ResponseEntity.ok().body(resident);
-		} catch (InvalidIdException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
-	
-	
-	
-/* delete resident by id*/
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<?> deleteVendor(@PathVariable("id") int id) {
+    @PostMapping("/add")
+    public Resident insert(@RequestBody Resident resident) {
+        User user = resident.getUser();
+        user.setRole("RESIDENT");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user = userService.insert(user);
+        resident.setUser(user);
+        resident = residentService.insert(resident);
+        return resident;
+    }
 
-		try {
-			Resident resident = residentService.getOne(id);
-			residentService.deleteResident(resident);
-			return ResponseEntity.ok().body("resident deleted successfully");
-		} catch (InvalidIdException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
-	
-	/* update profile of resident*/
-	@PutMapping("/update/{id}")
-	public ResponseEntity<?> updateResident(@PathVariable("id") int id, @RequestBody Resident resident) {
-	    try {
-	        resident.setId(id); // Set the ID from the path variable to the resident object
-	        Resident updatedResident = residentService.updateResident(id, resident); // Pass the ID to the service method
-	        return ResponseEntity.ok().body(updatedResident);
-	    } catch (InvalidIdException e) {
-	        return ResponseEntity.badRequest().body(e.getMessage());
-	    }
-	}
+    @GetMapping("/getone/{residentId}")
+    public ResponseEntity<?> getOne(@PathVariable("residentId") int residentId) {
+        try {
+            Resident resident = residentService.getOne(residentId);
+            return ResponseEntity.ok().body(resident);
+        } catch (InvalidIdException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+  
+    @GetMapping("/getResidentIdByUserId/{userId}")
+    public ResponseEntity<?> getResidentIdByUserId(@PathVariable("userId") int userId) {
+        int residentId = residentService.getResidentIdByUserId(userId);
+		return ResponseEntity.ok().body(residentId);
+    }
+
+
+    @GetMapping("/getAllResidents")
+    public ResponseEntity<?> getAllResidents() {
+        List<Resident> allResidents = residentService.getAllResidents();
+        return ResponseEntity.ok().body(allResidents);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteResident(@PathVariable("id") int residentId) {
+        try {
+            // Get the resident
+            Resident resident = residentService.getOne(residentId);
+            // Get the associated user
+            User user = resident.getUser();
+            // Delete the resident
+            residentService.deleteResident(resident);
+            // Delete the user
+            userService.deleteUser(user);
+
+            return ResponseEntity.ok().body("Resident and associated user deleted successfully");
+        } catch (InvalidIdException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateResident(@PathVariable("id") int residentId, @RequestBody Resident resident) {
+        try {
+            resident.setId(residentId);
+            Resident updatedResident = residentService.updateResident(residentId, resident);
+            return ResponseEntity.ok().body(updatedResident);
+        } catch (InvalidIdException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

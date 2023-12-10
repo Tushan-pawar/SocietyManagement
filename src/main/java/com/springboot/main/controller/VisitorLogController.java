@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,8 @@ import com.springboot.main.service.VisitorLogService;
 
 @Controller
 @RequestMapping("/visitorlogs")
+@CrossOrigin(origins = {"http://localhost:3000"})
+
 public class VisitorLogController {
 	@Autowired
 	private VisitorLogService visitorLogService;
@@ -47,12 +50,20 @@ public class VisitorLogController {
 	}
 	@GetMapping("/getbyresident/{residentId}")
     public ResponseEntity<?> getVisitorLogsByResident(@PathVariable("residentId") int residentId) {
-        try {
+       try {
             List<VisitorLog> visitorLogs = visitorLogService.getVisitorLogsByResidentId(residentId);
             return ResponseEntity.ok().body(visitorLogs);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-	
+	@GetMapping("/getall")
+	public ResponseEntity<?> getAllVisitorLogs() {
+	    try {
+	        List<VisitorLog> visitorLogs = visitorLogService.getAllVisitorLogs();
+	        return ResponseEntity.ok().body(visitorLogs);
+	    } catch (Exception e) {
+	        return ResponseEntity.badRequest().body(e.getMessage());
+	    }
+	}
 }

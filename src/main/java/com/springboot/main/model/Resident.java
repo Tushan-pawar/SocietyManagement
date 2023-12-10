@@ -12,8 +12,7 @@ public class Resident {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private String role;
-	private Boolean enabled;
+	private String role;	
 
 	@OneToOne
 	private User user;
@@ -43,13 +42,6 @@ public class Resident {
 		this.role = role;
 	}
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public User getUser() {
 		return user;

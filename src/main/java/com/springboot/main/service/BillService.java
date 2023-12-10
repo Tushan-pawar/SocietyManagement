@@ -1,4 +1,4 @@
-
+	
 package com.springboot.main.service;
 
 import java.util.List;
@@ -24,4 +24,18 @@ public class BillService {
 	public List<Bill> getBillByResident(int residentId) {
 		return billRepository.findByResidentId(residentId);
 	}
-}
+	public List<Bill> getUnpaidBills() {
+		return billRepository.getUnpaidBills();
+	}
+	public List<Bill> getPaidBills() {
+		// TODO Auto-generated method stub
+		return billRepository.getPaidBills();
+	}
+	
+	public List<Bill> getWaterBill() {
+		// TODO Auto-generated method stub
+		return billRepository.getWaterBill();
+	}
+	
+	}
+	

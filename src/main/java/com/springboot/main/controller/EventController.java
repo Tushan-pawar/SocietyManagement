@@ -1,16 +1,20 @@
 package com.springboot.main.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.main.model.Event;
@@ -18,6 +22,8 @@ import com.springboot.main.service.EventService;
 
 @RestController
 @RequestMapping("/events")
+@CrossOrigin(origins = { "http://localhost:3000" })
+
 public class EventController {
 	@Autowired
 	private EventService eventService;
@@ -30,8 +36,11 @@ public class EventController {
 
 	/* Get all events */
 	@GetMapping("/getallEvents")
-	public List<Event> getAllEvents() {
-		return eventService.getAllEvents();
+	public Page<Event> getAllEvents(
+	    @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+	    @RequestParam(value = "size", required = false, defaultValue = "4") Integer size) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return eventService.getAllEvents(pageable);
 	}
 
 	/* Update Events by id */
@@ -52,9 +61,6 @@ public class EventController {
 				if (updatedEvent.getLocation() != null) {
 					existingEvent.setLocation(updatedEvent.getLocation());
 				}
-				if (updatedEvent.getParticipantList() != null) {
-					existingEvent.setParticipantList(updatedEvent.getParticipantList());
-				}
 
 				// Save the updated event
 				Event updatedEventEntity = eventService.insert(existingEvent);
@@ -66,8 +72,5 @@ public class EventController {
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-	} 
 	}
-	
-
-	
+}

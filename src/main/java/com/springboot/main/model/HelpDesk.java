@@ -21,6 +21,9 @@ public class HelpDesk {
 
 	@ManyToOne
 	private Resident resident;
+	
+	@ManyToOne
+	private User user;
 
 	public int getId() {
 		return id;
@@ -55,6 +58,7 @@ public class HelpDesk {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 
 	public LocalDate getDate() {
 		return date;

@@ -1,7 +1,13 @@
 package com.springboot.main.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +26,8 @@ import com.springboot.main.service.VisitorLogService;
 
 @RestController
 @RequestMapping("/gatekeeper")
+@CrossOrigin(origins = { "http://localhost:3000" })
+
 public class GatekeeperController {
 
 	@Autowired
@@ -29,12 +37,40 @@ public class GatekeeperController {
 	@Autowired
 	private ResidentService residentService;
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
 	private VisitorLogService visitorLogService;
 
-	@PostMapping("/addGatekeeper")
+	@GetMapping("/getAll")
+	public List<Gatekeeper> getAllGatekeeper() {
+		return gatekeeperService.getAllGatekeeper();
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> deleteGatekeeper(@PathVariable("id") int gatekeeperId) {
+	    try {
+	        // Get the gatekeeper
+	        Gatekeeper gatekeeper = gatekeeperService.getOne(gatekeeperId);
+	        // Get the associated user
+	        User user = gatekeeper.getUser();
+	        // Delete the gatekeeper
+	        gatekeeperService.deleteGatekeeper(gatekeeper);
+	        // Delete the user
+	        userService.deleteUser(user);
+	        return ResponseEntity.ok().body("Gatekeeper and associated user deleted successfully");
+	    } catch (InvalidIdException e) {
+	        return ResponseEntity.badRequest().body(e.getMessage());
+	    }
+	}
+
+
+	@PostMapping("/add")
 	public Gatekeeper insert(@RequestBody Gatekeeper gatekeeper) {
 		/* save user with id */
 		User user = gatekeeper.getUser();
+		String passwordPlain = user.getPassword();
+		String encodedPassword = passwordEncoder.encode(passwordPlain);
+		user.setPassword(encodedPassword);
 		/* set role as gatekeeper */
 		user.setRole("GATEKEEPER");
 		/* Update the Gatekeeper object */

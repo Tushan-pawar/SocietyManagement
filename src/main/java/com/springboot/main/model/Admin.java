@@ -13,7 +13,6 @@ public class Admin {
     private int id;
     private String name;
 	private String role;
-	private Boolean enabled;
 
 	@OneToOne
 	private User user;
@@ -48,13 +47,5 @@ public class Admin {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 	}

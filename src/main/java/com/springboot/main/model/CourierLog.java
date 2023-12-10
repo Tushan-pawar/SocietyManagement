@@ -15,7 +15,6 @@ public class CourierLog {
 	private int id;
 	private String courierName;
 	private LocalDate entryTime;
-	private LocalDate exitTime;
 
 	@ManyToOne
 	private Gatekeeper gatekeeper;
@@ -38,6 +37,7 @@ public class CourierLog {
 		this.courierName = courierName;
 	}
 
+	
 	public LocalDate getEntryTime() {
 		return entryTime;
 	}
@@ -46,15 +46,11 @@ public class CourierLog {
 		this.entryTime = entryTime;
 	}
 
-	public LocalDate getExitTime() {
-		return exitTime;
-	}
-
-	public void setExitTime(LocalDate exitTime) {
-		this.exitTime = exitTime;
-	}
-
 	
+
+	public void setGatekeeper(Gatekeeper gatekeeper) {
+		this.gatekeeper = gatekeeper;
+	}
 
 	public Gatekeeper getGatekeeper() {
 		return gatekeeper;

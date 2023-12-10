@@ -1,16 +1,20 @@
 package com.springboot.main.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.main.model.Notice;
@@ -18,6 +22,7 @@ import com.springboot.main.service.NoticeService;
 
 @RestController
 @RequestMapping("/notices")
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class NoticeController {
 
 	@Autowired
@@ -31,8 +36,10 @@ public class NoticeController {
 
 	/* Get all notices */
 	@GetMapping("/getallNotices")
-	public List<Notice> getAllNotices() {
-		return noticeService.getAllNotices();
+	public Page<Notice> getAllNotices(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+			@RequestParam(value = "size", required = false, defaultValue = "3") Integer size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return noticeService.getAllNotices(pageable);
 	}
 
 	/* Update Notices by id */

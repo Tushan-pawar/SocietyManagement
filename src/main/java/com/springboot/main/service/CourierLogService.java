@@ -20,4 +20,9 @@ public class CourierLogService {
 	public List<CourierLog> getCourierLogByResident(int residentId) {
 		return courierLogRepository.findByResidentId(residentId);
 	}
+
+	public List<CourierLog> getAllCourierLogs() {
+		// TODO Auto-generated method stub
+		return courierLogRepository.findAll();
+	}
 }

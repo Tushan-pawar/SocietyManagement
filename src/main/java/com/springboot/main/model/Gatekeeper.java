@@ -12,9 +12,7 @@ public class Gatekeeper {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private String role;
-	private Boolean enabled;
-	
+	private String role;	
 	@OneToOne
 	private User user;
 	
@@ -41,14 +39,6 @@ public class Gatekeeper {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public User getUser() {

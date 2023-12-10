@@ -1,5 +1,6 @@
 package com.springboot.main.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,21 @@ public class GatekeeperService {
     public Gatekeeper insert(Gatekeeper gatekeeper) {
         return gatekeeperRepository.save(gatekeeper);
     }
-    public Gatekeeper getOne(int gatekeeperId) throws InvalidIdException {
-		Optional<Gatekeeper> optional =gatekeeperRepository.findById(gatekeeperId);
-		if(!optional.isPresent()){
-			throw new InvalidIdException("gatekeeper ID Invalid");
-		}
-		return optional.get();
-	}
 
+    public Gatekeeper getOne(int gatekeeperId) throws InvalidIdException {
+        Optional<Gatekeeper> optional = gatekeeperRepository.findById(gatekeeperId);
+        if (!optional.isPresent()) {
+            throw new InvalidIdException("gatekeeper ID Invalid");
+        }
+        return optional.get();
+    }
+
+    public List<Gatekeeper> getAllGatekeeper() {
+        return gatekeeperRepository.findAll();
+    }
+
+	public void deleteGatekeeper(Gatekeeper gatekeeper) {
+		// TODO Auto-generated method stub
+		 gatekeeperRepository.delete(gatekeeper);
+	}
 }
