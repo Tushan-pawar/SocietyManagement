@@ -44,7 +44,8 @@ Logger logger = LoggerFactory.getLogger(HelpDeskController.class);
 	public ResponseEntity<?> postHelpDesk(@RequestBody HelpDesk helpDesk, @PathVariable("residentId") int residentId) {
 		try {
 			Resident resident = residentService.getOne(residentId);
-			helpDesk.setResident(resident);
+			  logger.info("Add Ticket Status " + helpDesk.getDescription());
+			  helpDesk.setResident(resident);
 			helpDesk = helpDeskService.postHelpDesk(helpDesk);
 			helpDesk.setStatus("ACTIVE");
 			return ResponseEntity.ok().body(helpDesk);
@@ -67,7 +68,7 @@ Logger logger = LoggerFactory.getLogger(HelpDeskController.class);
 			@RequestBody HelpDesk updatedTicket) {
 		try {
 			HelpDesk existingTicket = helpDeskService.getOne(ticketId);
-			logger.info("Updated Ticket Status");
+			logger.info("Updated Ticket Status "+updatedTicket.getDescription());
 			if (updatedTicket.getDate() != null) {
 				existingTicket.setDate(updatedTicket.getDate());
 			}
@@ -85,5 +86,4 @@ Logger logger = LoggerFactory.getLogger(HelpDeskController.class);
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-
 }

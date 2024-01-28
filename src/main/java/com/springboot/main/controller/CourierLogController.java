@@ -76,7 +76,6 @@ public class CourierLogController {
 	    return ResponseEntity.ok().body(courierLogs);
 	}
 	
-	
 	}
 
 

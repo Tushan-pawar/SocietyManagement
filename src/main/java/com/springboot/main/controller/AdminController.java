@@ -71,5 +71,6 @@ public class AdminController {
 	public List<Admin> getAllAdmins() {
 		return adminService.getAllAdmins();
 	}
+	
 
 }

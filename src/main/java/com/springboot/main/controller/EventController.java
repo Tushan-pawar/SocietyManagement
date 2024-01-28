@@ -34,7 +34,6 @@ public class EventController {
 		return eventService.insert(event);
 	}
 
-	/* Get all events */
 	@GetMapping("/getallEvents")
 	public Page<Event> getAllEvents(
 	    @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
@@ -61,8 +60,6 @@ public class EventController {
 				if (updatedEvent.getLocation() != null) {
 					existingEvent.setLocation(updatedEvent.getLocation());
 				}
-
-				// Save the updated event
 				Event updatedEventEntity = eventService.insert(existingEvent);
 
 				return ResponseEntity.ok().body(updatedEventEntity);

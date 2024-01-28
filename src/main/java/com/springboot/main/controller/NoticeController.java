@@ -47,20 +47,13 @@ public class NoticeController {
 	public ResponseEntity<?> updateNotice(@PathVariable int id, @RequestBody Notice updatedNotice) {
 		try {
 			Optional<Notice> optionalNotice = noticeService.findById(id);
-
 			if (optionalNotice.isPresent()) {
 				Notice existingNotice = optionalNotice.get();
-
 				if (updatedNotice.getContent() != null) {
-					existingNotice.setContent(updatedNotice.getContent());
-				}
-
+				existingNotice.setContent(updatedNotice.getContent());}
 				Notice updatedNoticeEntity = noticeService.insert(existingNotice);
-
-				return ResponseEntity.ok().body(updatedNoticeEntity);
-			} else {
-				return ResponseEntity.notFound().build();
-			}
+				return ResponseEntity.ok().body(updatedNoticeEntity);} else {
+				return ResponseEntity.notFound().build();}
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}

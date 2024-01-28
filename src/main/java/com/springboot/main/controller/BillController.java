@@ -2,6 +2,8 @@ package com.springboot.main.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,13 +30,16 @@ public class BillController {
 
     @Autowired
     private BillService billService;
+    Logger logger = LoggerFactory.getLogger(HelpDeskController.class);
 
     @PostMapping("/addBills/{residentId}")
     public ResponseEntity<?> postBill(@RequestBody Bill bill, @PathVariable("residentId") int residentId) {
         try {
             Resident resident = residentService.getOne(residentId);
+  		  	logger.info("Bills added ");
             bill.setResident(resident);
             bill = billService.postBill(bill);
+            bill.setPaid("UNPAID");
             return ResponseEntity.ok().body(bill);
         } catch (InvalidIdException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -91,7 +96,7 @@ public class BillController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+   
     @GetMapping("getall/unpaid/{residentId}")
     public ResponseEntity<?> getunPaidBill(@PathVariable("residentId") int residentId) {
         try {

@@ -13,7 +13,7 @@ public interface BillRepository extends JpaRepository<Bill, Integer>{
 	List<Bill> findByResidentId(int residentId);
 
 	
-	@Query("SELECT b FROM Bill b WHERE b.paid = NULL")
+	@Query("SELECT b FROM Bill b WHERE b.paid = NULL and b.paid =0")
 	List<Bill> getUnpaidBills();
 
 	@Query("SELECT b FROM Bill b WHERE b.paid = 1")
@@ -22,7 +22,7 @@ public interface BillRepository extends JpaRepository<Bill, Integer>{
 	@Query("SELECT b FROM Bill b WHERE b.particulars = 'Water Bill'")
 	List<Bill> getWaterBill();
 
-	 @Query("SELECT b FROM Bill b WHERE b.resident.id = :residentId AND b.paid = 1")
+	 @Query("SELECT b FROM Bill b WHERE b.resident.id = :residentId AND b.paid = 1 and b.paid= paid")
 	    List<Bill> getPaidBillsByResident(@Param("residentId") Long residentId);
 	
 }

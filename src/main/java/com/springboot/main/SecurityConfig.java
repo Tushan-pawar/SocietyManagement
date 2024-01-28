@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.springboot.main.service.UserService;
 
@@ -27,11 +28,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/user/login").authenticated()
-				.anyRequest().permitAll()
-				.and().httpBasic()
-				.and().cors().disable()
-				.csrf().disable();
+		.antMatchers(HttpMethod.POST, "/user/login").authenticated()
+        .antMatchers(HttpMethod.GET, "/bills/getall").authenticated()
+        .antMatchers(HttpMethod.GET, "/notices/getallNotices").permitAll()
+        .antMatchers(HttpMethod.GET, "/events/getallEvents").permitAll()
+        .antMatchers(HttpMethod.POST, "/addcourier/{residentId}").hasAnyAuthority("GATEKEEPER")
+        .anyRequest().permitAll()
+        .and()
+        .httpBasic()
+        .and()
+        .cors().disable()
+        .csrf().disable();
 	}
 
 	public DaoAuthenticationProvider getProvider() {
