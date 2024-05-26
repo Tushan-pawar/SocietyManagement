@@ -35,6 +35,7 @@ public class ResidentController {
     @Autowired
     private ResidentService residentService;
 
+    /* Add residents */
     @PostMapping("/add")
     public Resident insert(@RequestBody Resident resident) {
         User user = resident.getUser();
@@ -46,6 +47,7 @@ public class ResidentController {
         return resident;
     }
 
+    /* Get residents by id */
     @GetMapping("/getone/{residentId}")
     public ResponseEntity<?> getOne(@PathVariable("residentId") int residentId) {
         try {
@@ -63,13 +65,14 @@ public class ResidentController {
 		return ResponseEntity.ok().body(residentId);
     }
 
-
+    /* Get all residents */
     @GetMapping("/getAllResidents")
     public ResponseEntity<?> getAllResidents() {
         List<Resident> allResidents = residentService.getAllResidents();
         return ResponseEntity.ok().body(allResidents);
     }
 
+    /*Delete Resident by Id */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteResident(@PathVariable("id") int residentId) {
         try {
